@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FlowPhangan – For Builders</title>
+<style>
+    /* Define CSS custom properties at the root level for global access */
+    :root {
+        /* Colors */
+        --color-background: #fdfdfd;
+        --color-text-primary: #333;
+        --color-text-secondary: #444;
+        --color-text-tertiary: #555;
+        --color-text-muted: #999;
+        --color-border: #eee;
+        --color-link-underline: #3333;
+        
+        /* Spacing */
+        --spacing-xs: 0.25em;
+        --spacing-sm: 0.5em;
+        --spacing-md: 1em;
+        --spacing-lg: 1.5em;
+        --spacing-xl: 2em;
+        --spacing-xxl: 5vh;
+        
+        /* Typography */
+        --font-size-small: 0.9rem;
+        --font-size-base: 1rem;
+        --font-size-medium: 1.1rem;
+        --font-size-large: 1.25rem;
+        --font-size-xl: 1.8rem;
+        --font-size-xxl: 3rem;
+        
+        /* Layout */
+        --content-width-max: 700px;
+        --content-width-percentage: 90%;
+        --container-padding: 5vw;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background: var(--color-background);
+        color: var(--color-text-primary);
+        line-height: 1.6;
+    }
+
+    header {
+        padding: 0 var(--container-padding);
+        text-align: center;
+    }
+
+    header img {
+        display: block;
+        max-width: min(500px, 70%);
+        width: 100%;
+        height: auto;
+        margin: var(--spacing-xxl) auto 0 auto;
+    }
+
+    header h1 {
+        font-size: var(--font-size-xxl);
+        font-weight: 700;
+        margin: 10vh 0 var(--spacing-sm);
+    }
+
+    header p {
+        font-size: var(--font-size-large);
+        max-width: var(--content-width-max);
+        margin: 0 auto var(--spacing-xxl) auto;
+        color: var(--color-text-tertiary);
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: 1fr min(var(--content-width-max), var(--content-width-percentage)) 1fr;
+        margin: var(--spacing-xxl) 0;
+    }
+
+    main section {
+        grid-column: 2;
+        margin-bottom: var(--spacing-xxl);
+        opacity: 0;
+        animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+
+    section h2 {
+        font-size: var(--font-size-xl);
+        font-weight: 600;
+        margin-bottom: var(--spacing-md);
+        border-bottom: 1px solid var(--color-border);
+        padding-bottom: var(--spacing-xs);
+    }
+
+    section p, section ul {
+        font-size: var(--font-size-medium);
+        color: var(--color-text-secondary);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    section ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    section ul li::before {
+        content: "– ";
+        color: var(--color-text-muted);
+    }
+
+    footer {
+        text-align: center;
+        padding: var(--spacing-xxl) 0;
+        font-size: var(--font-size-small);
+        color: var(--color-text-muted);
+    }
+
+    a {
+        color: var(--color-text-primary);
+        text-decoration: none;
+        border-bottom: 1px solid var(--color-link-underline);
+    }
+
+    a:hover {
+        border-bottom-color: var(--color-text-primary);
+    }
+
+    @media (max-width: 600px) {
+        :root {
+            /* Adjust typography scale for mobile */
+            --font-size-xxl: 2.2rem;
+            --font-size-xl: 1.5rem;
+            --font-size-large: 1.1rem;
+            --font-size-medium: var(--font-size-base);
+        }
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 1;
+        transition: opacity 0.8s ease-out;  /* Smoother transition */
+    }
+
+    .terminal {
+        font-family: 'Courier New', monospace;
+        font-size: 1.2rem;
+        color: #333;
+        padding: 1rem;
+        border-radius: 4px;
+        background: #f8f8f8;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        opacity: 0;
+        animation: fadeIn 0.3s ease-out 0.5s forwards;
+        position: relative;
+        max-width: 600px;
+        width: 90%;
+        height: calc(1.2rem * 4 + 2rem);
+        margin: 0 auto;
+        user-select: none;
+        pointer-events: none;
+        overflow: hidden;
+        white-space: pre-wrap;
+        display: flex;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .typing-text {
+        display: inline;
+        white-space: pre-wrap;
+        margin: 0;
+        padding: 0;
+        line-height: 1.2;
+    }
+
+    @keyframes blink {
+        from, to { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+        to { opacity: 1 }
+    }
+
+    .hide-overlay {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .flash {
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.9);
+        animation: flash 0.2s ease-out;
+        pointer-events: none;
+    }
+
+    @keyframes flash {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+
+    figure {
+        margin: var(--spacing-xl) auto;
+        width: 90%;
+        max-width: 500px; /* Reduced from default content width */
+    }
+
+    figure img {
+        width: 100%;
+        height: auto;
+        max-height: 400px; /* Reduced from 600px */
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    figure figcaption {
+        margin-top: var(--spacing-sm);
+        font-size: var(--font-size-small);
+        color: var(--color-text-muted);
+        text-align: center;
+    }
+
+</style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="terminal">
+            <span class="typing-text"></span><span class="cursor"></span>
+        </div>
+    </div>
+    <header>
+        <h1>FlowPhangan</h1>
+        <p>
+            Join our pop-up community of engineers and digital nomads for a month on the 
+            beautiful island of Koh Phangan
+        </p>
+    </header>
+    
+    <main>
+        <section id="what">
+            <h2>What</h2>
+            <p>We want to  gather builders and cool humans on the <a href="https://www.google.com/maps/place/Ko+Pha+Ngan/@9.7349598,99.9388031,35068m/ target="_blank" rel="noopener noreferrer">Thai island of Ko Phangan</a> for 4 weeks, from April 18th to May 18th 2025. We already have a villa to use as informal coworking and gathering space but the rest is up to you.</p>
+            <p>A handful of people will stay in the villa itself, we encourage others to find their own lodging nearby. We are keeping things simple: a group chat for coordination, some community dinners and informal unconference-style sessions on weekdays. High-agency individuals welcome; we’re not hand-holding.</p>
+
+            <figure>
+                <img src="Jack_Day.jpg" alt="Hacking in Ko Phangan during the day" />
+                <figcaption>Jack demonstrating several AI coding tools to builders on Ko Phangan in November 2024</figcaption>
+            </figure>
+
+        </section>
+    
+        <section id="why">
+            <h2>Why Ko Phangan?</h2>
+            <p>In our opinion, it's one of the best places in the world to nomad:</p>
+            <ul>
+                <li>Low cost of living, excellent views and beaches, and easy to get modern amenities</li>
+                <li>Cost per meal of $2 - $6</li>
+                <li>The island culture is fantastic: Muy Thai, multiple ecstatic dances, an active yoga & conscious community</li>
+                <li>Accommodation on island for all budgets: from $400/mo bungalows to $10k/mo luxury villas (split with your friends!)</li>
+            </ul>
+            <figure>
+                <img src="Night_LivingRoom.JPG" alt="Hacking in Ko Phangan during the night" style="max-width:100%;height:auto;margin-top:2em;"/>
+                <figcaption>
+                    Atin leading a discussion about the philosophical implications of 
+                    <a href="https://en.wikipedia.org/wiki/Superintelligence">
+                        superintelligence
+                    </a> 
+                    during their previous visit to the island
+                </figcaption>
+            </figure>
+        </section>
+    
+        <section id="who">
+            <h2>Who We Are</h2>
+            <p>We’re two remote-working devs who want to gather like-minded builders:</p>
+            <ul>
+                <li><strong>Atin</strong>: An experienced founder and engineer, working on a new startup</li>
+                <li><strong>Jack</strong>: A developer focused on AI-augmented building, working as a remote engineering consultant</li>
+            </ul>
+            <p>We’re not running a conference; we’re simply providing a temporal and physical anchor to gather good souls.</p>
+        </section>
+    
+        <section id="where">
+            <h2>Where</h2>
+            <p>The main villa is between Koh Ma and Chaloklum beach. Book your lodging within a short scooter ride to keep things close.</p>
+            <figure>
+                <img src="Villa-SideView.png" alt="Venue view from pool" style="max-width:100%;height:auto;margin-top:2em;"/>
+                <img src="Villa-LivingRoom.jpeg" alt="Venue view from pool" style="max-width:100%;height:auto;margin-top:2em;"/>
+                <img src="Villa-UpperView.jpg" alt="Venue view from pool" style="max-width:100%;height:auto;margin-top:2em;"/>
+                <figcaption>The villa is bangin'</figcaption>
+            </figure>
+        </section>
+    
+        <section id="when">
+            <h2>When</h2>
+            <p>We'll gather from April 18th to May 18th, 2025. This timing is intentional – FlowPhangan ends exactly 7 days before Edge Esmeralda begins, allowing for a seamless flow for those planning to attend both gatherings.</p>
+            <p>The month-long format gives ample time to settle into a productive rhythm while building meaningful connections.</p>
+        </section>
+
+        <section id="interested">
+            <h2>Interested?</h2>
+            <p>If this resonates, bring your laptop to Ko Phangan in April, and register your interest here [link pending] to get added to the group chat. Meet other high-agency individuals to exchange ideas and create side-by-side.</p>
+            <p>For more info or to connect, reach out: <a href="mailto:info@flowphangan.com">info@flowphangan.com</a></p>
+        </section>
+    </main>
+    
+    <footer>
+        &copy; 2025 FlowPhangan. Come build.
+    </footer>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Add URL parameter check
+    const urlParams = new URLSearchParams(window.location.search);
+    const skipAnimation = urlParams.get('skip-animation') === 'true';
+
+    const overlay = document.querySelector('.overlay');
+    const terminal = document.querySelector('.terminal');
+    const typingText = document.querySelector('.typing-text');
+    
+    // Skip animation if parameter is present
+    if (skipAnimation) {
+        overlay.classList.add('hide-overlay');
+        return;
+    }
+    
+    const textSequence = [
+        "Make the FlowPhangan website: a ",  // Type until first typo
+        "x",  // First typo
+        "compelling minimalistic static webpage, use best ",  // Continue until second typo
+        "o",  // Second typo
+        "practices, appeal to builders and digital nomads"  // Complete the text
+    ];
+    
+    let currentText = "";
+    let sequenceIndex = 0;
+    let charIndex = 0;
+    let isErasing = false;
+    
+    const typeChar = () => {
+        if (isErasing) {
+            currentText = currentText.slice(0, -1);
+            isErasing = false;
+            sequenceIndex++;  // Move to next sequence after erasing
+        } else {
+            const currentSequence = textSequence[sequenceIndex];
+            if (charIndex < currentSequence.length) {
+                currentText += currentSequence[charIndex];
+                charIndex++;
+            } else {
+                if (sequenceIndex < textSequence.length - 1) {
+                    if (sequenceIndex === 1 || sequenceIndex === 3) {  // After typos
+                        isErasing = true;
+                    }
+                    charIndex = 0;
+                    if (!isErasing) {
+                        sequenceIndex++;
+                    }
+                } else {
+                    // Typing complete, trigger flash and fade
+                    setTimeout(() => {
+                        const flash = document.createElement('div');
+                        flash.className = 'flash';
+                        terminal.appendChild(flash);
+                        
+                        setTimeout(() => {
+                            overlay.classList.add('hide-overlay');
+                        }, 200);
+                    }, 300);
+                    return;
+                }
+            }
+        }
+        
+        typingText.textContent = currentText;
+        
+        const delay = isErasing ? 150 : Math.random() * 100 + 5; // Increased from 30 to 100, and 20 to 50
+        setTimeout(typeChar, delay);
+    };
+    
+    setTimeout(typeChar, 500);
+});       
+</script>
+</body>
+</html>
