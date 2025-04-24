@@ -299,11 +299,28 @@
       margin-top: var(--spacing-md);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       box-shadow: 0 4px 15px rgba(255, 126, 95, 0.4);
+      cursor: pointer;
     }
     
     .btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 7px 20px rgba(255, 126, 95, 0.5);
+    }
+    
+    .rsvp-message {
+      display: none;
+      background: rgba(255, 255, 255, 0.95);
+      padding: var(--spacing-md);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      margin-top: var(--spacing-md);
+      animation: fadeIn 0.5s ease-out;
+      backdrop-filter: blur(5px);
+      border: 2px solid var(--color-primary);
+    }
+
+    .rsvp-message.show {
+      display: block;
     }
     
     .sunset-time {
@@ -448,11 +465,12 @@
       
       <p>Let's connect as an informal community in this beautiful place!</p>
       
-      <a href="https://t.me/+_kmNp6KJKW85MGQ5" target="_blank" rel="noopener noreferrer" class="btn">Join the community</a>
-    </div>
-    
-    <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.6700375723194!2d99.9895555760811!3d9.797611090281307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwNDcnNTEuNCJOIDk5wrA1OyczMC40IkU!5e0!3m2!1sen!2sth!4v1713119845307!5m2!1sen!2sth" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <button class="btn" id="rsvp-btn">RSVP</button>
+      
+      <div class="rsvp-message" id="rsvp-message">
+        <h2>Thanks for RSVPing!</h2>
+        <p>But we're not counting people. Just come through.</p>
+      </div>
     </div>
     
     <div class="hosts">
@@ -494,8 +512,19 @@
       };
     });
     
-    document.querySelectorAll('.description, .map-container, .hosts').forEach(el => {
+    document.querySelectorAll('.description, .hosts').forEach(el => {
       observer.observe(el);
+    });
+    
+    // RSVP Button functionality
+    document.getElementById('rsvp-btn').addEventListener('click', function() {
+      const message = document.getElementById('rsvp-message');
+      message.classList.add('show');
+      
+      // Scroll to message if necessary
+      setTimeout(() => {
+        message.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
     });
     
     // Monkey Easter Egg
