@@ -108,7 +108,7 @@
       padding: var(--spacing-lg) 0;
       position: relative;
       overflow: hidden;
-      background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.4)), url('Villa-SideView.png');
+      background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.4)), url('IMG_8455.jpg');
       background-size: cover;
       background-position: center;
       color: var(--color-light);
@@ -304,6 +304,27 @@
       font-weight: 900;
     }
     
+    .monkey-easter-egg {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 20px;
+      right: -60px;
+      z-index: 999;
+      cursor: pointer;
+      transition: right 0.3s ease;
+      animation: monkeyPeek 15s ease-in-out infinite;
+    }
+    
+    @keyframes monkeyPeek {
+      0%, 85%, 100% { right: -60px; }
+      90%, 95% { right: 0px; }
+    }
+    
+    .monkey-easter-egg:hover {
+      right: 0px;
+    }
+    
     @media (max-width: 768px) {
       html {
         font-size: 56.25%; /* 9px */
@@ -352,6 +373,8 @@
   <div class="emoji-decoration emoji-3">🎵</div>
   <div class="emoji-decoration emoji-4">🌴</div>
   
+  <div class="monkey-easter-egg">🐒</div>
+  
   <section class="hero">
     <div class="hero-content">
       <h1>Sunset Pool Party</h1>
@@ -391,11 +414,11 @@
       <p>After the great success of last weekend's kickoff dinner, we've acquired a nice sound system to help boost the vibe even further.</p>
       
       <div class="sunset-time">
-        <p>Sunset at</p>
-        <span>6:00pm</span>
+        <p>Vibes Loading</p>
+        <span>100%</span>
       </div>
       
-      <p>Join us outside by the pool to catch the sunset at 6pm, then inside with an epic view of Koh Ma and the squid boats after that.</p>
+      <p>Join us outside by the pool as the day turns to night, then inside with an epic view of Koh Ma and the squid boats after that.</p>
       
       <p>Let's connect as an informal community in this beautiful place!</p>
       
@@ -438,6 +461,16 @@
     
     document.querySelectorAll('.description, .map-container, .hosts').forEach(el => {
       observer.observe(el);
+    });
+    
+    // Monkey Easter Egg
+    document.querySelector('.monkey-easter-egg').addEventListener('click', function() {
+      const audio = new Audio('https://assets.coderrocketfuel.com/pomodoro-times-up.mp3');
+      audio.play();
+      this.textContent = "🙈";
+      setTimeout(() => {
+        this.textContent = "🐒";
+      }, 2000);
     });
   </script>
 </body>
