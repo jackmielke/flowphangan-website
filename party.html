@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flow Phangan – Sunset Pool Party</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏝️</text></svg>">
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Join us for a sunset pool party at Flow Phangan. Friday, Apr 25, 5:00pm – 10:00pm.">
+  <meta name="keywords" content="sunset pool party, Koh Phangan, Thailand, Flow Phangan, AI, machine learning">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Flow Phangan – Sunset Pool Party">
+  <meta property="og:description" content="Join us for a sunset pool party at Flow Phangan. Friday, Apr 25, 5:00pm – 10:00pm.">
+  <meta property="og:image" content="Villa-SideView.png">
+  <meta property="og:url" content="https://flowphangan.com/party">
+  <meta property="og:type" content="website">
+
+  <style>
+    :root {
+      /* Colors - Sunset/Pool Party Themed */
+      --color-primary: #ff7e5f;
+      --color-secondary: #feb47b;
+      --color-accent: #7ac5d8;
+      --color-dark: #3a3042;
+      --color-light: #fff8f0;
+      --color-overlay: rgba(255, 126, 95, 0.05);
+      
+      /* Typography */
+      --font-main: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-accent: 'Playfair Display', Georgia, serif;
+      
+      /* Spacing */
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 2rem;
+      --spacing-lg: 4rem;
+      --spacing-xl: 8rem;
+    }
+    
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      font-size: 62.5%;
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: var(--font-main);
+      font-size: 1.6rem;
+      line-height: 1.7;
+      color: var(--color-dark);
+      background: linear-gradient(135deg, #f8f9fa, #f1f3f5);
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, 
+                  rgba(255, 126, 95, 0.05), 
+                  rgba(254, 180, 123, 0.05), 
+                  rgba(122, 197, 216, 0.05));
+      background-size: 400% 400%;
+      animation: gradientFlow 15s ease infinite;
+      z-index: -1;
+    }
+    
+    .container {
+      max-width: 120rem;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+    }
+    
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: var(--spacing-lg) 0;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.4)), url('Villa-SideView.png');
+      background-size: cover;
+      background-position: center;
+      color: var(--color-light);
+    }
+    
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 30%;
+      background: linear-gradient(to top, #fff8f0, transparent);
+      z-index: 1;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: fadeIn 1s ease-out;
+    }
+    
+    h1 {
+      font-family: var(--font-accent);
+      font-size: 7.2rem;
+      font-weight: 900;
+      margin-bottom: var(--spacing-xs);
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.2;
+      text-shadow: 0px 2px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    h2 {
+      font-size: 2.8rem;
+      margin-bottom: var(--spacing-md);
+      font-weight: 700;
+    }
+    
+    .subtitle {
+      font-size: 2.4rem;
+      font-weight: 400;
+      margin-bottom: var(--spacing-md);
+      max-width: 70rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .event-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: var(--spacing-md) 0;
+      gap: var(--spacing-md);
+    }
+    
+    .event-detail {
+      background: rgba(255, 255, 255, 0.9);
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--color-dark);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .event-detail:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+    
+    .event-detail i {
+      font-size: 2.4rem;
+      color: var(--color-primary);
+    }
+    
+    .main-content {
+      padding: var(--spacing-lg) 0;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .description {
+      max-width: 80rem;
+      margin: 0 auto var(--spacing-lg);
+      padding: var(--spacing-md);
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+      backdrop-filter: blur(10px);
+      animation: fadeIn 1s ease-out 0.3s;
+      animation-fill-mode: both;
+    }
+    
+    .description p {
+      margin-bottom: var(--spacing-md);
+      font-size: 1.8rem;
+    }
+    
+    .emoji-decoration {
+      position: absolute;
+      opacity: 0.5;
+      animation: float 6s ease-in-out infinite;
+      font-size: 4rem;
+      z-index: -1;
+    }
+    
+    .emoji-1 { top: 10%; left: 5%; animation-delay: 0s; }
+    .emoji-2 { top: 20%; right: 5%; animation-delay: 1s; }
+    .emoji-3 { bottom: 10%; left: 10%; animation-delay: 2s; }
+    .emoji-4 { bottom: 30%; right: 10%; animation-delay: 3s; }
+    
+    .map-container {
+      width: 100%;
+      height: 40rem;
+      margin-bottom: var(--spacing-lg);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    .hosts {
+      text-align: center;
+      margin-top: var(--spacing-lg);
+      font-size: 1.8rem;
+    }
+    
+    .hosts span {
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+    
+    footer {
+      text-align: center;
+      padding: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+      font-size: 1.4rem;
+      color: var(--color-dark);
+      opacity: 0.8;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+      color: white;
+      padding: 1.2rem 3.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-top: var(--spacing-md);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 126, 95, 0.4);
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(255, 126, 95, 0.5);
+    }
+    
+    .sunset-time {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: var(--spacing-md) auto;
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      border-radius: 12px;
+      color: white;
+      max-width: 30rem;
+      box-shadow: 0 10px 30px rgba(255, 126, 95, 0.3);
+    }
+    
+    .sunset-time p {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .sunset-time span {
+      font-size: 4.8rem;
+      font-weight: 900;
+    }
+    
+    @media (max-width: 768px) {
+      html {
+        font-size: 56.25%; /* 9px */
+      }
+      
+      h1 {
+        font-size: 5.2rem;
+      }
+      
+      .subtitle {
+        font-size: 2rem;
+      }
+      
+      .event-details {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      html {
+        font-size: 50%; /* 8px */
+      }
+      
+      h1 {
+        font-size: 4.2rem;
+      }
+      
+      .hero {
+        height: auto;
+        min-height: 100vh;
+      }
+    }
+  </style>
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Emoji Decorations -->
+  <div class="emoji-decoration emoji-1">🏊</div>
+  <div class="emoji-decoration emoji-2">🍹</div>
+  <div class="emoji-decoration emoji-3">🎵</div>
+  <div class="emoji-decoration emoji-4">🌴</div>
+  
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Sunset Pool Party</h1>
+      <p class="subtitle">Join the AI and machine learning gurus of Flow Phangan for an epic evening by the pool</p>
+      
+      <div class="event-details">
+        <div class="event-detail">
+          <i class="far fa-calendar"></i>
+          <div>
+            <strong>Friday, Apr 25</strong>
+          </div>
+        </div>
+        
+        <div class="event-detail">
+          <i class="far fa-clock"></i>
+          <div>
+            <strong>5:00pm – 10:00pm</strong>
+          </div>
+        </div>
+        
+        <div class="event-detail">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <a href="https://www.google.com/maps/search/9%C2%B047'51.4%22N+99%C2%B059'30.4%22E?source=mc" target="_blank" style="color: inherit; text-decoration: none;">
+              <strong>View Location</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <main class="main-content container">
+    <div class="description">
+      <p>The AI and machine learning gurus of Flow Phangan are ready to throw a sunset pool party 🏝️</p>
+      
+      <p>After the great success of last weekend's kickoff dinner, we've acquired a nice sound system to help boost the vibe even further.</p>
+      
+      <div class="sunset-time">
+        <p>Sunset at</p>
+        <span>6:00pm</span>
+      </div>
+      
+      <p>Join us outside by the pool to catch the sunset at 6pm, then inside with an epic view of Koh Ma and the squid boats after that.</p>
+      
+      <p>Let's connect as an informal community in this beautiful place!</p>
+      
+      <a href="https://t.me/+_kmNp6KJKW85MGQ5" target="_blank" rel="noopener noreferrer" class="btn">Join the community</a>
+    </div>
+    
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.6700375723194!2d99.9895555760811!3d9.797611090281307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwNDcnNTEuNCJOIDk5wrA1OyczMC40IkU!5e0!3m2!1sen!2sth!4v1713119845307!5m2!1sen!2sth" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    
+    <div class="hosts">
+      Hosted by <span>Jack & Atin</span>
+    </div>
+  </main>
+  
+  <footer>
+    &copy; 2025 FlowPhangan. <a href="/" style="color: inherit;">Back to home</a>
+  </footer>
+  
+  <script>
+    // Simple parallax effect for hero section
+    window.addEventListener('scroll', function() {
+      const hero = document.querySelector('.hero');
+      const scrollPosition = window.scrollY;
+      
+      if (scrollPosition <= window.innerHeight) {
+        hero.style.backgroundPositionY = `calc(50% + ${scrollPosition * 0.5}px)`;
+      }
+    });
+    
+    // Add animation to elements when they enter viewport
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.description, .map-container, .hosts').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html> 
